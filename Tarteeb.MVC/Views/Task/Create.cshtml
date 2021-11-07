@@ -1,0 +1,53 @@
+﻿@model Tarteeb.MVC.Models.TaskViewModel
+
+@if (ViewData["Title"].ToString() == "Create")
+{
+    <h2>Create</h2>
+}
+else
+{
+    <h2>Update</h2>
+}
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewData["Title"].ToString() == "Create")
+        {
+            #region Create Form
+            #endregion
+        }
+        else
+        {
+            #region Update Form
+            #endregion
+        }
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" disabled/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input asp-for="Deadline" class="form-control" id="Deadline" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>$("#Deadline").removeAttr("data-val-required")</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

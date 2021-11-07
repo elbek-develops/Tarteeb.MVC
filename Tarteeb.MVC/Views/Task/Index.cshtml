@@ -34,12 +34,26 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Deadline)
+                @if (item.Deadline is null)
+                {
+                    <span>No deadline</span>
+                }
+                else
+                {
+                    var deadline = item.Deadline.Value.ToString("dddd, dd MMMM yyyy"); 
+                    @Html.DisplayFor(modelItem => deadline)
+                }
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink(linkText: "Edit",
+                                    actionName: "Edit",
+                                    controllerName: "Task",
+                                    routeValues: new { id = item.Id },
+                                    htmlAttributes: new { @class = "btn btn-sm btn-light" })
+                @using (Html.BeginForm("Delete", "Task", new { Id = item.Id }))
+                {
+                    <input type="submit" class="btn btn-sm btn-light" value="Delete" />
+                }
             </td>
         </tr>
 }

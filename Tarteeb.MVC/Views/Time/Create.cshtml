@@ -1,0 +1,93 @@
+﻿@model Tarteeb.MVC.Models.TimeViewModel
+@if (ViewData["Title"].ToString() == "Create")
+{
+    <h2>Create</h2>
+}
+else
+{
+    <h2>Update</h2>
+}
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewData["Title"].ToString() == "Create")
+        {
+            #region Create Form
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TaskId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TaskId, new SelectList(ViewBag.Tasks, "Id", "Description"), "Select task...", htmlAttributes: new { @class = "form-control", @Id = "TaskId" })
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Comment" class="control-label"></label>
+                    <input asp-for="Comment" class="form-control" />
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WorkHour" class="control-label"></label>
+                    <input asp-for="WorkHour" class="form-control" />
+                    <span asp-validation-for="WorkHour" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+            #endregion
+        }
+        else
+        {
+            #region Update Form
+            <form asp-action="Edit"  method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TaskId, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TaskId, new SelectList(ViewBag.Tasks, "Id", "Description"), "Select task...", htmlAttributes: new { @class = "form-control", @Id = "TaskId" })
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Comment" class="control-label"></label>
+                    <input asp-for="Comment" class="form-control" />
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WorkHour" class="control-label"></label>
+                    <input asp-for="WorkHour" class="form-control" />
+                    <span asp-validation-for="WorkHour" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+            #endregion
+        }
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>$("#TaskId").removeAttr("data-val-required")</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
